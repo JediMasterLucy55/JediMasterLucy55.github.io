@@ -2,6 +2,8 @@ var board;
 var score = 0;
 var rows = 4;
 var columns = 4;
+let touchStartX = 0;
+let touchStartY = 0;
 
 window.onload = function() {
     setGame();
@@ -34,10 +36,9 @@ function setGame() {
     //create 2 to begin the game
     setTwo();
     setTwo();
-
 }
 
-function updateTile(tile, num) {
+function updateTile(tile, num, r, c) {
     tile.innerText = "";
     tile.classList.value = ""; //clear the classList
     tile.classList.add("tile");
@@ -49,6 +50,8 @@ function updateTile(tile, num) {
             tile.classList.add("x8192");
         }                
     }
+  tile.innerText = num > 0 ? num : "";
+  tile.style.transform = `translate(${c*1}px, ${r*1}px)`; // smooth slide
 }
 
 document.addEventListener('keyup', (e) => {
@@ -70,7 +73,43 @@ document.addEventListener('keyup', (e) => {
         setTwo();
     }
     document.getElementById("score").innerText = score;
+
+    loseState();
 })
+
+// --- TOUCH CONTROLS FOR IPAD ---
+document.addEventListener("touchstart", (e) => {
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+});
+
+document.addEventListener("touchend", (e) => {
+    const touch = e.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+
+    const threshold = 30; // minimum swipe distance
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal swipe
+        if (deltaX > threshold) slideRight();
+        else if (deltaX < -threshold) slideLeft();
+    } else {
+        // Vertical swipe
+        if (deltaY > threshold) slideDown();
+        else if (deltaY < -threshold) slideUp();
+    }
+
+    // After swipe, spawn new tile and update score
+    setTwo();
+    document.getElementById("score").innerText = score;
+    loseState();
+});
+
+// Prevent page scrolling on mobile while swiping
+document.addEventListener("touchmove", (e) => {
+    e.preventDefault();
+}, { passive: false });
 
 function filterZero(row){
     return row.filter(num => num != 0); //create new array of all nums != 0
@@ -105,6 +144,13 @@ function slideLeft() {
             updateTile(tile, num);
         }
     }
+    for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns; c++){
+        let tile = document.getElementById(r + "-" + c);
+        let num = board[r][c];
+        updateTile(tile, num, r, c); // pass in new row/column
+    }
+  }
 }
 
 function slideRight() {
@@ -119,6 +165,13 @@ function slideRight() {
             updateTile(tile, num);
         }
     }
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns; c++){
+        let tile = document.getElementById(r + "-" + c);
+        let num = board[r][c];
+        updateTile(tile, num, r, c); // pass in new row/column
+    }
+  }
 }
 
 function slideUp() {
@@ -136,6 +189,13 @@ function slideUp() {
             updateTile(tile, num);
         }
     }
+    for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns; c++){
+        let tile = document.getElementById(r + "-" + c);
+        let num = board[r][c];
+        updateTile(tile, num, r, c); // pass in new row/column
+    }
+  }
 }
 
 function slideDown() {
@@ -155,6 +215,13 @@ function slideDown() {
             updateTile(tile, num);
         }
     }
+    for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns; c++){
+        let tile = document.getElementById(r + "-" + c);
+        let num = board[r][c];
+        updateTile(tile, num, r, c); // pass in new row/column
+    }
+  }
 }
 
 function setTwo() {
@@ -186,4 +253,23 @@ function hasEmptyTile() {
         }
     }
     return false;
+}
+
+function loseState() {
+  if (!hasEmptyTile() && !canMove()) {
+    window.location.href = "loser.html";
+  }
+}
+
+function canMove() {
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns; c++) {
+      let num = board[r][c];
+      // check right
+      if (c < columns - 1 && num == board[r][c + 1]) return true;
+      // check down
+      if (r < rows - 1 && num == board[r + 1][c]) return true;
+    }
+  }
+  return false;
 }
