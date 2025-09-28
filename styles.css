@@ -35,66 +35,79 @@ hr {
 /* colored tiles */
 
 .x2 {
-    background-color: #eee4da;
-    color: #727371;
+    background: url("musicNotes.png");
+    background-size: cover;
+    color: transparent;
 }
 
 .x4 {
-    background-color: #ece0ca;
-    color: #727371;
+    background: url("saxophone.png");
+    background-size: cover;
+    color: transparent;
 }
 
 .x8 {
-    background-color: #f4b17a;
-    color: white;
+    background: url("microphone.jpeg");
+    background-size: cover;
+    color: transparent;
 }
 
 .x16{
-    background-color: #f59575;
-    color: white;
+    background: url("Miniature\ Designer\ Shopping\ Bags\ Display.png");
+    background-size: cover;
+    color: transparent;
 }
 
 .x32{
-    background-color: #f57c5f;
-    color: white;
+    background: url("laneige.jpeg");
+    background-size: cover;
+    color: transparent;
 }
 
 .x64{
-    background-color: #f65d3b;
-    color: white;
+    background: url("solDeJaneiro.jpeg");
+    background-size: cover;
+    color: transparent;
 }
 
 .x128{
-    background-color: #edce71;
-    color: white;
+    background: url("lululemon.png");
+    background-size: cover;
+    color: transparent;
 }
 
 .x256{
-    background-color: #edcc63;
-    color: white;
+    background: url("sephora.jpeg");
+    background-size: cover;
+    color: transparent;
 }
 
 .x512{
-    background-color: #edc651;
-    color: white;
+   background: url("pup.jpg");
+    background-size: cover;
+    color: transparent;
 }
 
 .x1024{
-    background-color: #eec744;
-    color: white;
+    background: url("wicked.jpeg");
+    background-size: cover;
+    color: transparent;
 }
 
 .x2048{
-    background-color: #ecc230;
-    color: white;
+    background: url("zombies4.jpeg");
+    background-size: cover;
+    color: transparent;
 }
 
 .x4096 {
-    background-color: #fe3d3d;
-    color: white;
+    background: url("worldsCollide.jpg");
+    background-size: cover;
+    color: transparent;
 }
 
 .x8192 {
-    background-color: #ff2020;
-    color: white;
+    background: url("pudgyPenguin.png");
+    background-size: cover;
+    color: transparent;
 }
