@@ -1,5 +1,5 @@
 body {
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
 }
 
@@ -30,6 +30,9 @@ hr {
     justify-content: center;
     align-items: center;
 }
+
+
+/* colored tiles */
 
 .x2 {
     background-color: #eee4da;
@@ -92,11 +95,6 @@ hr {
 }
 
 .x8192 {
-    background-color: #ff2020;
-    color: white;
-}
-
-.x16384 {
     background-color: #ff2020;
     color: white;
 }
